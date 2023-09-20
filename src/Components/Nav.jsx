@@ -1,5 +1,6 @@
 import React from "react";
-import "./CSS/nav.css"
+import "../CSS/nav.css";
+import TaskForm from "./taskForm";
 
 const Nav = () =>{
     return (
@@ -13,6 +14,7 @@ const Nav = () =>{
                     <li>Features</li>
                 </ul>
             </nav>
+            <TaskForm/>
         </div>
     )
 } 
