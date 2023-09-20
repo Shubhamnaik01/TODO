@@ -47,18 +47,25 @@ input[type="text"]:focus{
 }
 
 .listbox{
-    width: 100%;
+    width: 96%;
     background-color: white;
     height: max-content;
     margin: auto;
-    padding: 12px 7px;
+    padding: 10px 7px;
     border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-
+i:hover{
+    cursor: pointer;
+}
 .list{
-    /* display: flex;
-    justify-content: space-between; */
     width: 100%;
+}
+.fa-heart{
+    font-weight: 100;
+}
+.fa-heart:hover{
+    font-weight: 500;
 }
 #heart{
     color: #d03535;

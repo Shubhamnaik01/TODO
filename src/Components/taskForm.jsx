@@ -4,7 +4,7 @@ import "../CSS/taskForm.css"
 function TaskForm(){
     const [totalCount,setTotalCount] = useState(0);
     const [completed,setCompletedTask] = useState(0);
-    const [taskList,setTaskList] = useState([]);
+    const [taskList,setTaskList] = useState([{task:"NewTask",Completed:false}]);
     return(
         <div>
             <div className="container">
@@ -17,13 +17,22 @@ function TaskForm(){
                 </div>
                 <div className="listbox">
                     <div className="list d-flex justify-content-between">
-                        <div>1.MyTask</div>
-                        <div className="d-flex justify-content-around align-items-center" style={{width:"22%"}}>
-                            <i class="fa-solid fa-heart" id="heart"></i>
-                            <i class="fa-solid fa-trash"></i> 
-                            <i class="fa-solid fa-check-double" style={{color: '#26e5f2'}}></i>
-                            <i class="fa-regular fa-pen-to-square" style={{color: '#d99f20'}}></i>
-                        </div>
+                        {
+                            taskList.map((ele,ind)=>{
+                                return (
+                                    <>
+                                    <div>{ind+1}.{ele.task}</div>
+                                    <div className="d-flex justify-content-around align-items-center" style={{width:"22%"}}>
+                                        <i class="fa-solid fa-heart" id="heart"></i>
+                                        <i class="fa-solid fa-trash"></i> 
+                                        <i class="fa-solid fa-check-double" style={{color: '#26e5f2'}}></i>
+                                        <i class="fa-regular fa-pen-to-square" style={{color: '#d99f20'}}></i>
+                                    </div>
+                                    </>
+                                )
+                            })
+                        }
+                       
                     </div>
                 </div>
             </div>
