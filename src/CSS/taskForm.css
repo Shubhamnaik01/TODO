@@ -47,13 +47,14 @@ input[type="text"]:focus{
 }
 
 .listbox{
-    width: 96%;
+    width: 99%;
     background-color: white;
     height: max-content;
     margin: auto;
-    padding: 10px 7px;
-    border-radius: 20px;
+    padding: 9.3px 7px;
+    border-radius: 10px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-top: 10px;
 }
 i:hover{
     cursor: pointer;
