@@ -62,12 +62,7 @@ i:hover{
 .list{
     width: 100%;
 }
-.fa-heart{
-    font-weight: 100;
-}
-.fa-heart:hover{
-    font-weight: 500;
-}
+
 #heart{
     color: #d03535;
 }
