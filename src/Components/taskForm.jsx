@@ -8,9 +8,12 @@ function TaskForm(){
     const [taskList,setTaskList] = useState([{task:"NewTask",Completed:false,isFavourite:false}]);
     const [val , setval]  = useState('') ;
     const [isFavouriteList,setIsFavouriteList] = useState([]);
+    const [isCompletedList, setIsCompletedList] = useState([])
+    var updated = [];
+    var complete = [];
     function Addtask(){
         if(!val)return;
-        setTaskList([...taskList,{task:val,completed:false,isFavourite:false}])
+        setTaskList([...taskList,{task:val,Completed:false,isFavourite:false}])
         setval('')
     }
     function settask(e){
@@ -19,6 +22,9 @@ function TaskForm(){
     useEffect(function(){
          setTotalCount(taskList.length)
     },[taskList])
+    useEffect(function(){
+        setCompletedTask(isCompletedList.length)
+    },[isCompletedList])
 
     function setfav(index,event){
         setTaskList(taskList.map(function(elemen,ind){
@@ -35,6 +41,28 @@ function TaskForm(){
             })
         )
     }
+    function deletetask(ind){
+        setTaskList(taskList.filter(function(ele,i,arr){
+            return i!=ind
+        }))
+    }
+    function CompletedTask(i,event){
+        setTaskList(
+         updated =  taskList.map(
+                function(elem,ind,arr){
+                    if(i==ind){
+                        elem.Completed = !elem.Completed;
+                    }
+                    return elem;
+                }))
+        setIsCompletedList(
+            taskList.filter(function(e,i,a){
+               return e.Completed
+            })
+               
+        )
+    }
+
     return(
         <div>
             <div className="container">
@@ -51,16 +79,14 @@ function TaskForm(){
                 <div key={ind}>
                 <div className="listbox" >
                                 <div className="list d-flex justify-content-between">
-                                    <div><b>{ind + 1}.</b><u>{ele.task}</u></div>
+                                    <div><b>{ind + 1}.</b><u className={taskList[ind].Completed?'line':''}>{ele.task}</u></div>
                                 <div className="d-flex justify-content-around align-items-center" style={{width:"22%"}}>
-                                {
-                                            <span>
-                                                <i className={"fa-regular  fa-heart"} id={ind} hidden={taskList[ind].isFavourite} onClick={setfav.bind(null,ind)}></i>
-                                                <i className={"fa-solid fa-heart"} id={ind}  hidden={!taskList[ind].isFavourite} onClick={setfav.bind(null,ind)}></i> 
-                                            </span>
-                                }
-                                <i className="fa-solid fa-trash"></i> 
-                                <i className="fa-solid fa-check-double" style={{color: '#26e5f2'}}></i>
+                                <span>
+                                    <i className={"fa-regular  fa-heart"} id={ind} hidden={taskList[ind].isFavourite} onClick={setfav.bind(null,ind)}></i>
+                                    <i className={"fa-solid fa-heart"} id={ind}  hidden={!taskList[ind].isFavourite} onClick={setfav.bind(null,ind)}></i> 
+                                </span>
+                                <i className="fa-solid fa-trash"onClick={deletetask.bind(null,ind)}></i> 
+                                <i className="fa-solid fa-check-double" onClick={CompletedTask.bind(null,ind)} style={{color: '#26e5f2'}}></i>
                                 <i className="fa-regular fa-pen-to-square" style={{color: '#d99f20'}}></i>
                             </div>
                         </div>

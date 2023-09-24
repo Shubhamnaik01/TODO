@@ -66,3 +66,8 @@ i:hover{
 .fa-heart{
     color: #d03535;
 }
+
+.line{
+    text-decoration: line-through;
+    color: tomato;
+}
