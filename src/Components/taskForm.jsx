@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../CSS/taskForm.css"
 import { render } from "react-dom";
 
@@ -7,8 +7,9 @@ function TaskForm(){
     const [completed,setCompletedTask] = useState(0);
     const [taskList,setTaskList] = useState([{task:"NewTask",Completed:false,isFavourite:false}]);
     const [val , setval]  = useState('') ;
-    const [isFavourite,setisFavourite] = useState(false);
+    const [isFavouriteList,setIsFavouriteList] = useState([]);
     function Addtask(){
+        if(!val)return;
         setTaskList([...taskList,{task:val,completed:false,isFavourite:false}])
         setval('')
     }
@@ -19,8 +20,20 @@ function TaskForm(){
          setTotalCount(taskList.length)
     },[taskList])
 
-    function setfav(mind){
-        
+    function setfav(index,event){
+        setTaskList(taskList.map(function(elemen,ind){
+            if(ind===index){
+                elemen.isFavourite = !elemen.isFavourite
+            }
+            return elemen;
+        }))
+
+        //creating another list for the favourites 
+        setIsFavouriteList(
+            taskList.filter((element)=>{
+              return element.isFavourite == true;
+            })
+        )
     }
     return(
         <div>
@@ -40,14 +53,12 @@ function TaskForm(){
                                 <div className="list d-flex justify-content-between">
                                     <div><b>{ind + 1}.</b><u>{ele.task}</u></div>
                                 <div className="d-flex justify-content-around align-items-center" style={{width:"22%"}}>
-                            <div onClick={setfav.bind(null,ind)}>
                                 {
-                                    <div>
-                                        <i className={"fa-regular  fa-heart"} id="heart"></i>
-                                        {/* <i className={" fa-solid fa-heart"} id="heart"></i> */} 
-                                    </div>
+                                            <span>
+                                                <i className={"fa-regular  fa-heart"} id={ind} hidden={taskList[ind].isFavourite} onClick={setfav.bind(null,ind)}></i>
+                                                <i className={"fa-solid fa-heart"} id={ind}  hidden={!taskList[ind].isFavourite} onClick={setfav.bind(null,ind)}></i> 
+                                            </span>
                                 }
-                            </div>
                                 <i className="fa-solid fa-trash"></i> 
                                 <i className="fa-solid fa-check-double" style={{color: '#26e5f2'}}></i>
                                 <i className="fa-regular fa-pen-to-square" style={{color: '#d99f20'}}></i>
