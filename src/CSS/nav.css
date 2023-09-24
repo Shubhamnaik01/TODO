@@ -16,7 +16,7 @@
     list-style-type: none;
     padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex: 1;
     color: azure;
 }
