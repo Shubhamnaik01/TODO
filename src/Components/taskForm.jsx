@@ -55,12 +55,15 @@ function TaskForm(){
                     }
                     return elem;
                 }))
-        setIsCompletedList(
-            taskList.filter(function(e,i,a){
-               return e.Completed
-            })
-               
+
+        taskList.forEach(
+            function(e,i,a){
+                if(e.Completed){
+                    complete.push(e);
+                }
+            }
         )
+        setIsCompletedList(complete)
     }
 
     return(
